@@ -1,0 +1,72 @@
+
+ext{
+    versions = [
+            springBoot: '2.7.7',
+            springCloud: '3.1.5',
+            lombok    : '1.18.24',
+            postgreSQL: '42.5.1',
+            swagger: '1.6.14',  //openApi
+            mapstruct: '1.5.3.Final',
+            graphql : "13.0.0",
+            graphiql : "11.1.0",
+            auth0 : "4.0.0",
+
+    ]
+    libs = [
+            mapstruct: "org.mapstruct:mapstruct:$versions.mapstruct",
+            mapStructProcessor:"org.mapstruct:mapstruct-processor:$versions.mapstruct",
+            springBootDataJpa     : "org.springframework.boot:spring-boot-starter-data-jpa:${versions.springBoot}",
+            springBootWeb         : "org.springframework.boot:spring-boot-starter-web:${versions.springBoot}",
+            springBootDataRedis    : "org.springframework.boot:spring-boot-starter-data-redis:${versions.springBoot}",
+            springBootDataElasticsearch : "org.springframework.boot:spring-boot-starter-data-elasticsearch:${versions.springBoot}",
+            springBootValidation  : "org.springframework.boot:spring-boot-starter-validation:${versions.springBoot}",
+            springBootDevTools    : "org.springframework.boot:spring-boot-devtools:${versions.springBoot}",
+            //openFeign = feign client
+            springCloudOpenFeign  : "org.springframework.cloud:spring-cloud-starter-openfeign:${versions.springCloud}",
+
+            //Spring Cloud Config için gerekli bağımlılıklar . Server-Client
+            springCloudConfig      : "org.springframework.cloud:spring-cloud-starter-config:${versions.springCloud}",
+            springCloudConfigServer: "org.springframework.cloud:spring-cloud-config-server:${versions.springCloud}",
+            springCloudConfigClient: "org.springframework.cloud:spring-cloud-config-client:${versions.springCloud}",
+
+            //Spring Cloud Gateway için gerekli bağımlılıklar
+            springCloudGateway     :  "org.springframework.cloud:spring-cloud-starter-gateway:3.1.4",
+
+            //CircutBreaker= Devre kesici, ulaşılamayan servicelere bağlantı keser
+            springCloudCircutBreaker: "org.springframework.cloud:spring-cloud-starter-circuitbreaker-resilience4j:2.1.4",
+            springCloudCircutBreakerReactor: "org.springframework.cloud:spring-cloud-starter-circuitbreaker-reactor-resilience4j:2.1.4",
+
+            //MongoDb Bağımlılıkları
+            springBootDataMongo     : "org.springframework.boot:spring-boot-starter-data-mongodb:${versions.springBoot}",
+
+            // zipkin server için bağımlılıklar
+            springCloudStarterSleuth    : "org.springframework.cloud:spring-cloud-starter-sleuth:3.1.7",
+            springCloudStarterZipkin    : "org.springframework.cloud:spring-cloud-sleuth-zipkin:3.1.7",
+
+            //GraphQL
+            GraphqlJavaTools            : "com.graphql-java-kickstart:graphql-java-tools:$versions.graphql",
+            GraphqlSpringBootStarter    : "com.graphql-java-kickstart:graphql-spring-boot-starter:$versions.graphql",
+            GraphiqlSpringBootStarter   : "com.graphql-java-kickstart:graphiql-spring-boot-starter:$versions.graphiql",
+
+            //jwt
+            jwt                    : "com.auth0:java-jwt:${versions.auth0}",
+
+
+            // Spring AMQP ile RabbitMQ Kullanımı
+            springBootStarterAmqp   : "org.springframework.boot:spring-boot-starter-amqp:${versions.springBoot}",
+
+            // Spring Security
+            springBootStarterSecurity   : "org.springframework.boot:spring-boot-starter-security:${versions.springBoot}",
+
+
+
+
+            lombok                : "org.projectlombok:lombok:${versions.lombok}",
+            postgreSQL            : "org.postgresql:postgresql:${versions.postgreSQL}",
+            swaggerui             : "org.springdoc:springdoc-openapi-ui:${versions.swagger}",
+            jacksondatabind        : "com.fasterxml.jackson.core:jackson-databind:2.12.5"
+
+    ]
+}
+
+

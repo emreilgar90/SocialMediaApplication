@@ -1,0 +1,21 @@
+server:
+  port: 8090
+
+spring:
+  datasource:
+    username: postgres
+    password: root
+    url: jdbc:postgresql://localhost:5432/SocialMediaDB
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+
+myapplication:
+  feign:
+    user:
+      profile: http://localhost:8091/api/v1/user
+      follow: http://localhost:8091/api/v1/follow
+    post: http://localhost:8092/api/v1/post
+

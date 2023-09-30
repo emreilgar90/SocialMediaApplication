@@ -1,0 +1,40 @@
+server:
+  port: 8090
+
+spring:
+  zipkin:
+    enabled: true
+    base-url: http://localhost:9411
+    service:
+      name: auth-service
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: java4
+    password: root
+  datasource:
+    username: postgres
+    password: root
+    #url: jdbc:postgresql://javasocialmedia-postgresql/SocialMediaAuthDB
+    url: jdbc:postgresql://localhost:5432/SocialMediaAuthDB
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+
+myapplication:
+  feign:
+    user:
+      profile: http://localhost:8091/api/v1/user
+      follow: http://localhost:8091/api/v1/follow
+    post: http://localhost:8092/api/v1/post
+
+jwt:
+  secretKey: "java1234"
+  issuer: "emre"
+  audience: "emreilgar"
+
+rabbitmq:
+  exchange-auth: auth-exchange
+  bindingKeyRegister: register-key
+  queueRegister: register-queue

@@ -1,0 +1,15 @@
+server:
+  port: 8889
+spring:
+  application:
+    name: config-server-git
+  cloud:
+    config:
+      server:
+        git:
+          uri: "https://github.com/emreilgar90/configserversocialmedia.git"
+          default-label: main
+          #main git de oluşturduğum repo'nun branch adı.
+          skip-ssl-validation: true
+          username: "emreilgar90"
+          password:  "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"
