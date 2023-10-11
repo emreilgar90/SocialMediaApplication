@@ -43,6 +43,8 @@ allprojects{
         //lombok
         implementation libs.lombok
         annotationProcessor libs.lombok
+        annotationProcessor libs.lombokMapstructBinding
+
         //swagger = openApi
         implementation libs.swaggerui
         //mapstruct
@@ -58,7 +60,7 @@ allprojects{
         implementation libs.springBootDataRedis
 
         //jackson-data
-        implementation libs.jacksondatabind
+        //implementation libs.jacksondatabind
 
 
     }

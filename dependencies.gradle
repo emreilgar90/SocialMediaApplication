@@ -21,6 +21,7 @@ ext{
             springBootDataElasticsearch : "org.springframework.boot:spring-boot-starter-data-elasticsearch:${versions.springBoot}",
             springBootValidation  : "org.springframework.boot:spring-boot-starter-validation:${versions.springBoot}",
             springBootDevTools    : "org.springframework.boot:spring-boot-devtools:${versions.springBoot}",
+            springBootMailSender  : "org.springframework.boot:spring-boot-starter-mail:${versions.springBoot}",
             //openFeign = feign client
             springCloudOpenFeign  : "org.springframework.cloud:spring-cloud-starter-openfeign:${versions.springCloud}",
 
@@ -40,8 +41,8 @@ ext{
             springBootDataMongo     : "org.springframework.boot:spring-boot-starter-data-mongodb:${versions.springBoot}",
 
             // zipkin server için bağımlılıklar
-            springCloudStarterSleuth    : "org.springframework.cloud:spring-cloud-starter-sleuth:3.1.7",
-            springCloudStarterZipkin    : "org.springframework.cloud:spring-cloud-sleuth-zipkin:3.1.7",
+            springCloudStarterSleuth    : "org.springframework.cloud:spring-cloud-starter-sleuth:${versions.springCloud}",
+            springCloudStarterZipkin    : "org.springframework.cloud:spring-cloud-sleuth-zipkin:${versions.springCloud}",
 
             //GraphQL
             GraphqlJavaTools            : "com.graphql-java-kickstart:graphql-java-tools:$versions.graphql",
@@ -64,7 +65,9 @@ ext{
             lombok                : "org.projectlombok:lombok:${versions.lombok}",
             postgreSQL            : "org.postgresql:postgresql:${versions.postgreSQL}",
             swaggerui             : "org.springdoc:springdoc-openapi-ui:${versions.swagger}",
-            jacksondatabind        : "com.fasterxml.jackson.core:jackson-databind:2.12.5"
+            jacksondatabind        : "com.fasterxml.jackson.core:jackson-databind:2.12.5",
+            lombokMapstructBinding : "org.projectlombok:lombok-mapstruct-binding:0.2.0",
+
 
     ]
 }

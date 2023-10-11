@@ -33,3 +33,6 @@ jwt:
 
 rabbitmq:
   queueRegister: register-queue
+  exchange-user: user-exchange
+  bindingKeyUpdate: update-key
+  queueUpdate: update-queue

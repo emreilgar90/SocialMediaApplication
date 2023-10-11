@@ -12,6 +12,8 @@ import com.emreilgar.exception.AuthManagerException;
 import com.emreilgar.exception.ErrorType;
 import com.emreilgar.manager.IUserManager;
 import com.emreilgar.mapper.IAuthMapper;
+import com.emreilgar.rabbitmq.model.EmailSenderModel;
+import com.emreilgar.rabbitmq.producer.EmailProducer;
 import com.emreilgar.rabbitmq.producer.RegisterUserProducer;
 import com.emreilgar.repository.IAuthRepository;
 import com.emreilgar.repository.entity.Auth;
@@ -37,17 +39,19 @@ public class AuthService extends ServiceManager<Auth,Long> {
     private final CacheManager cacheManager;
     private final JwtTokenManager jwtTokenManager;
     private final RegisterUserProducer registerUserProducer;
+    private final EmailProducer emailProducer;
 
-    public AuthService(JpaRepository<Auth, Long> repository, IAuthRepository authRepository, IUserManager userManager, CacheManager cacheManager, JwtTokenManager jwtTokenManager, RegisterUserProducer registerUserProducer) {
+    public AuthService(JpaRepository<Auth, Long> repository, IAuthRepository authRepository, IUserManager userManager, CacheManager cacheManager, JwtTokenManager jwtTokenManager, RegisterUserProducer registerUserProducer, EmailProducer emailProducer) {
         super(authRepository);
         this.authRepository = authRepository;
         this.userManager = userManager;//@EnableFeignClient anatasyonunu yazmazsan hata alınır.
         this.cacheManager = cacheManager;
         this.jwtTokenManager = jwtTokenManager;
         this.registerUserProducer = registerUserProducer;
+        this.emailProducer = emailProducer;
     }
     /**********************************************************************************************/
-    //@Transactional
+    @Transactional
     public RegisterResponseDto register(RegisterRequestDto dto) {
         Auth auth = IAuthMapper.INSTANCE.toAuth(dto); //dto dan bir Auth yarat
 
@@ -64,7 +68,7 @@ public class AuthService extends ServiceManager<Auth,Long> {
             throw new AuthManagerException(ErrorType.USER_NOT_CREATED);
         }
     }
-    @Transactional
+
     public RegisterResponseDto registerWithRabbitMQ(RegisterRequestDto dto) {
         Auth auth = IAuthMapper.INSTANCE.toAuth(dto); //dto dan bir Auth yarat
 
@@ -72,9 +76,11 @@ public class AuthService extends ServiceManager<Auth,Long> {
             throw new AuthManagerException(ErrorType.USERNAME_DUPLICATE);
         }
         try {
-            auth.setActivationCode(CodeGenerator.generateCode());//code üretip setledik.
+            String code= CodeGenerator.generateCode();
+            auth.setActivationCode(code);//code üretip setledik.
             save(auth);
             registerUserProducer.sendNewUser(IAuthMapper.INSTANCE.toNewCreateUserModel(auth));
+            emailProducer.sendActivationCode(EmailSenderModel.builder().email(auth.getEmail()).activationCode(code).build());
             return IAuthMapper.INSTANCE.toRegisterResponseDto(auth);
         } catch (Exception e) {
             System.out.println(e.toString());

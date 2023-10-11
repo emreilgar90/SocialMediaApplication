@@ -8,9 +8,7 @@ dependencies {
     implementation libs.postgreSQL
     implementation libs.springCloudConfigClient //config server'a bağlanmak için aktif edilir.
     implementation libs.springBootStarterAmqp
-
-
-   // implementation libs.springBootStarterSecurity
+    implementation libs.springBootStarterSecurity
 
 
 
