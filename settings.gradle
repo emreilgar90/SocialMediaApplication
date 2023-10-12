@@ -8,4 +8,5 @@ include 'elastic-service'
 include 'elastic-service'
 include 'elastic-service'
 include 'mail-service'
+include 'post-service'
 

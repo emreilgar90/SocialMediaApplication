@@ -5,7 +5,10 @@ import com.emreilgar.dto.response.UpdateResponseDto;
 import com.emreilgar.repository.entity.UserProfile;
 import com.emreilgar.repository.enums.Status;
 import com.emreilgar.service.UserProfileService;
+import io.swagger.v3.oas.annotations.Operation;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Slice;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
@@ -62,4 +65,16 @@ public class UserProfileController {
     public ResponseEntity<List<UserProfile>> findAll(){
         return ResponseEntity.ok(userProfileService.findAll());
     }
+    @GetMapping("/findallbypageable")
+    public ResponseEntity<Page<UserProfile>> findAllPageable(int pageSize,int pageNumber,
+                                                             String direction, String sortpage){
+        return ResponseEntity.ok(userProfileService.findAllPageable(pageSize,pageNumber,direction,sortpage));
+    }
+    @GetMapping("/findallslice")
+    @Operation(summary = "Parça parça veri getirir.")
+    public ResponseEntity<Slice<UserProfile>> findAllSlice(int pageSize, int pageNumber,
+                                                           String direction, String sortpage){
+        return ResponseEntity.ok(userProfileService.findAllPageable(pageSize,pageNumber,direction,sortpage));
+    }
+
 }

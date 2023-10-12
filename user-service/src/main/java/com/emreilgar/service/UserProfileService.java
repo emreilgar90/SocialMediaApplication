@@ -17,6 +17,7 @@ import com.emreilgar.utillity.JwtTokenManager;
 import com.emreilgar.utillity.ServiceManager;
 import org.springframework.cache.CacheManager;
 import org.springframework.cache.annotation.Cacheable;
+import org.springframework.data.domain.*;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -175,4 +176,16 @@ public class UserProfileService extends ServiceManager<UserProfile,String> {
         }
     }
 
+    public Page<UserProfile> findAllPageable(int pageSize, int pageNumber, String direction, String sortpage) {
+        Sort sort=Sort.by(Sort.Direction.fromString(direction),sortpage);
+        Pageable pageable= PageRequest.of(pageNumber,pageSize,sort);
+        return userProfileRepository.findAll(pageable);
+
+    }
+    public Slice<UserProfile> findAllSlice(int pageSize, int pageNumber, String direction, String sortpage) {
+        Sort sort=Sort.by(Sort.Direction.fromString(direction),sortpage);
+        Pageable pageable= PageRequest.of(pageNumber,pageSize,sort);
+        return userProfileRepository.findAll(pageable);
+
+    }
 }
